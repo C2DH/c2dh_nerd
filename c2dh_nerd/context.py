@@ -3,6 +3,7 @@ import tempfile
 import logging
 from typing import Callable
 from diskcache import Cache
+from importlib import reload
 
 from .ner.flair import FlairNer
 from .ner.spacy import SpacyNer
