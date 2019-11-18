@@ -68,12 +68,12 @@ def add_context(app: dict):
   return app
 
 
-def get_data(tag):
+def get_data(tag = None):
   if str(os.environ.get('DOWNLOAD_MODELS', '')) == '1':
     from spacy.cli import download
-    if tag == 'ner_en_core_web_sm':
+    if tag == 'ner_spacy_small_en' or tag is None:
       download('en_core_web_sm')
-    if tag == 'xx_ent_wiki_sm':
+    if tag == 'ner_spacy_small_multi' or tag is None:
       download('xx_ent_wiki_sm')
     # download('en_core_web_lg')
 
