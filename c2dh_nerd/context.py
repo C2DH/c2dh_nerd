@@ -3,7 +3,6 @@ import tempfile
 import logging
 from typing import Callable
 from diskcache import Cache
-from importlib import reload
 
 from .ner.flair import FlairNer
 from .ner.spacy import SpacyNer
@@ -73,15 +72,12 @@ def get_data(tag = None):
   if str(os.environ.get('DOWNLOAD_MODELS', '')) == '1':
     import spacy
     from spacy.cli import download
-    should_reload = False
     if tag == 'ner_spacy_small_en' or tag is None:
       download('en_core_web_sm')
-      should_reload = True
+      spacy.load('en_core_web_sm')
     if tag == 'ner_spacy_small_multi' or tag is None:
       download('xx_ent_wiki_sm')
-      should_reload = True
-    if should_reload:
-      reload(spacy)
+      spacy.load('xx_ent_wiki_sm')
     # download('en_core_web_lg')
 
 _ner_or_ned_cache = {}
