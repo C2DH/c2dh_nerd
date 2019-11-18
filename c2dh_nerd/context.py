@@ -70,14 +70,11 @@ def add_context(app: dict):
 
 def get_data(tag = None):
   if str(os.environ.get('DOWNLOAD_MODELS', '')) == '1':
-    import spacy
     from spacy.cli import download
     if tag == 'ner_spacy_small_en' or tag is None:
       download('en_core_web_sm')
-      spacy.load('en_core_web_sm')
     if tag == 'ner_spacy_small_multi' or tag is None:
       download('xx_ent_wiki_sm')
-      spacy.load('xx_ent_wiki_sm')
     # download('en_core_web_lg')
 
 _ner_or_ned_cache = {}

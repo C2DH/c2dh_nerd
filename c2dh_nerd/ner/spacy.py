@@ -1,4 +1,3 @@
-import spacy
 
 from .ner import NER, TextOrSentences, text_to_sentences, sentences_to_text
 from .result import NerResult, NerResultEntity
@@ -21,6 +20,7 @@ def as_ner_result_entity(entity) -> NerResultEntity:
 
 class SpacyNer(NER):
   def __init__(self, model_name: str = 'small_en'):
+    import spacy
     assert model_name in MODELS_MAPPING, \
       'Unknown model name: "{}". Available models: {}'.format(model_name, ', '.join(MODELS_MAPPING.keys()))
     self._model = spacy.load(MODELS_MAPPING[model_name])
