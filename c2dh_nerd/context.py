@@ -71,6 +71,7 @@ def add_context(app: dict):
 
 def get_data(tag = None):
   if str(os.environ.get('DOWNLOAD_MODELS', '')) == '1':
+    import spacy
     from spacy.cli import download
     should_reload = False
     if tag == 'ner_spacy_small_en' or tag is None:
