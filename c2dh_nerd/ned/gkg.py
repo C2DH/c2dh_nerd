@@ -28,7 +28,7 @@ def get_tag_from_types(types):
 
 def as_ned_resource(item):
   result = item['result']
-  types = result['@type']
+  types = result['@type'] if '@type' in result else []
   tag = get_tag_from_types(types)
 
   return NedResource(
