@@ -1,14 +1,24 @@
+# Using ubuntu instead of alpine because alpine has problems with CUDA support
+# and pytorch may not work even when running on CPU
 FROM python:3.6-slim
 
-RUN apt-get update && apt-get install -y unixodbc-dev gcc g++ --no-install-recommends
+RUN apt-get update && \
+    apt-get -y install \
+      build-essential \
+      cmake \
+      unixodbc-dev \
+      libopenblas-dev \
+      gfortran \
+      libfreetype6-dev \
+      libpng-dev \
+      wget \
+      unzip \
+      pkg-config
 
 WORKDIR /c2dh-nerd
 
 COPY ./requirements.txt .
 RUN pip install -r ./requirements.txt
-
-RUN apt-get purge -y --auto-remove unixodbc-dev gcc g++
-RUN rm -rf /var/lib/apt/lists/*
 
 COPY . .
 
